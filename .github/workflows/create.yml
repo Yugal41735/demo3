@@ -14,8 +14,8 @@ on:
   workflow_dispatch:
 
 env:
-  FOLDER1: "C:\\MyCustomFolder\\folder1"
-  FOLDER2: "C:\\MyCustomFolder\\folder2"
+  FOLDER1: "C:\\Users\\VM-YA\\Desktop\\folder1"
+  FOLDER2: "C:\\Users\\VM-YA\\Desktop\\folder2"
   FILE_NAME: "1.txt"
   FILE_CONTENT: "This is 1.txt file"
 
