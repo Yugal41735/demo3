@@ -1,0 +1,63 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  create-folder1:
+    # The type of runner that the job will run on
+    runs-on: self-hosted
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      # Runs a single command using the runners shell
+      # - name: Create folder and file on Desktop
+      #   run: |
+      #     mkdir -p "$HOME/Desktop/folder1"
+      #     echo "Hello from GitHub Actions!" > "$HOME/Desktop/folder1/1.txt"
+
+      - name: Changing dir
+        run: cd "C:\Users\VM-YA\Desktop"
+        # run: |
+        #   $desktop = [Environment]::GetFolderPath('Desktop')
+        #   $folder1 = Join-Path $desktop "folder1"
+        #   New-Item -ItemType Directory -Path $folder1 -Force
+        #   $file1 = Join-Path $folder1 "1.txt"
+        #   Set-Content -Path $file1 -Value "Hello from GitHub Actions on Windows!"
+
+      - name: Creating folder
+        run: mkdir folder1
+
+      - name: Creating file in folder1
+        run: echo This is a sample text > filename.txt
+
+      # - name: Create folder2 on Desktop
+      #   shell: pwsh
+      #   run: |
+      #     $desktop = [Environment]::GetFolderPath('Desktop')
+      #     $folder2 = Join-Path $desktop "folder2"
+
+
+      # - name: Copy 1.txt from folder1 to folder2
+      #   shell: pwsh
+      #   run: |
+      #     $desktop = [Environment]::GetFolderPath('Desktop')
+      #     $source = Join-Path $desktop "folder1\1.txt"
+      #     $destination = Join-Path $desktop "folder2\1.txt"
+      #     Copy-Item -Path $source -Destination $destination -Force
+
