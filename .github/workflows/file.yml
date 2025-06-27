@@ -1,0 +1,27 @@
+name: HandsOnAssignment
+
+on:
+  workflow_dispatch:
+
+env:
+  FOLDER1: "C:\\MyCustomFolder\\folder1"
+  FOLDER2: "C:\\MyCustomFolder\\folder2"
+  FILE_NAME: "1.txt"
+  FILE_CONTENT: "This is 1.txt file"
+
+jobs:
+  desktop-setup:
+    runs-on: self-hosted
+    steps:
+      - name: Create folder1 and add a file
+        run: |
+          mkdir $env:FOLDER1
+          Set-Content "$env:FOLDER1\\$env:FILE_NAME" -Value "$env:FILE_CONTENT"
+
+      - name: Create folder2
+        run: |
+          mkdir $env:FOLDER2
+
+      - name: Copy file from folder1 to folder2
+        run: |
+          Copy-Item "$env:FOLDER1\\$env:FILE_NAME" -Destination "$env:FOLDER2\\$env:FILE_NAME"
