@@ -1,0 +1,20 @@
+# Resource Group Configuration
+resource_group_name = "rg-terraform-azure-demo"
+location           = "East US"
+environment        = "development"
+project_name       = "azure-terraform-demo"
+
+# Virtual Machine Configuration
+vm_name          = "vm-linux-ubuntu"
+vm_size          = "Standard_B1s"
+admin_username   = "azureuser"
+ssh_public_key_path = "~/.ssh/id_rsa.pub"
+
+# SQL Server Configuration
+sql_server_name     = "sql-server-terraform-demo-98765"
+sql_admin_username  = "sqladmin"
+sql_admin_password  = "ComplexP@ssw0rd123!"
+sql_database_name   = "terraform_demo_db"
+
+# Storage Account Configuration
+storage_account_name = "terraformstorageacc98765"
