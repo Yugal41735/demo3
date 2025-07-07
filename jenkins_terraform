@@ -1,58 +1,30 @@
 pipeline {
     agent any
 
-    environment {
-        TF_VERSION = '1.6.0'
-        TF_WORKING_DIR = './terraform' // adjust if your code is elsewhere
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'your-git-credentials-id', url: 'https://github.com/your-org/your-repo.git'
+                git url: 'https://github.com/your-org/your-terraform-repo.git'
             }
         }
 
         stage('Terraform Init') {
             steps {
-                dir("${env.TF_WORKING_DIR}") {
-                    sh 'terraform init'
-                }
-            }
-        }
-
-        stage('Terraform Validate') {
-            steps {
-                dir("${env.TF_WORKING_DIR}") {
-                    sh 'terraform validate'
-                }
+                sh 'terraform init'
             }
         }
 
         stage('Terraform Plan') {
             steps {
-                dir("${env.TF_WORKING_DIR}") {
-                    sh 'terraform plan -out=tfplan'
-                }
+                sh 'terraform plan'
             }
         }
 
         stage('Terraform Apply') {
-            when {
-                branch 'main'
-            }
             steps {
-                dir("${env.TF_WORKING_DIR}") {
-                    input message: 'Approve Terraform Apply?'
-                    sh 'terraform apply tfplan'
-                }
+                input message: 'Approve Terraform Apply?'
+                sh 'terraform apply -auto-approve'
             }
-        }
-    }
-
-    post {
-        failure {
-            echo 'Pipeline failed!'
         }
     }
 }
